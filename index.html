@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elev-Arte - Formulario de Autodescubrimiento</title>
+    <!-- Iconos de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        
+        body {
+            background-color: #000000;
+            background-image: radial-gradient(circle, #1a1a1a, #000000 80%);
+            color: #FFFFFF;
+            font-family: 'HP Simplified', 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 800px; margin: 0 auto; }
+        .logo { text-align: center; margin-bottom: 2rem; }
+        .logo img { max-width: 220px; filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3)); }
+        h1, h2 { font-family: 'HP Simplified', 'Montserrat', sans-serif; font-weight: bold; color: #FFED00; text-align: center; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; }
+        h2 { font-size: 1.8rem; padding-bottom: 0.75rem; margin-bottom: 2rem; border-bottom: 1px solid #444; display: inline-block; }
+        .section-header { text-align: center; }
+        .intro-text { text-align: center; margin-bottom: 3rem; font-size: 1.1rem; color: #cccccc; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .form-group { background-color: #111; padding: 1.5rem 2rem; margin-bottom: 2rem; border-radius: 8px; border-left: 4px solid #FFED00; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
+        .question-title { display: block; font-weight: bold; margin-bottom: 1.2rem; font-size: 1.2rem; color: #f0f0f0; }
+        .option { margin-bottom: 0.8rem; }
+        .option input[type="checkbox"], .option input[type="radio"] { display: none; }
+        .option label { display: block; padding: 12px 18px; border: 1px solid #444; border-radius: 5px; cursor: pointer; transition: all 0.2s ease-in-out; }
+        .option label:hover { background-color: #2a2a2a; border-color: #FFED00; }
+        .option input:checked + label { background-color: #FFED00; color: #000; border-color: #FFED00; font-weight: bold; }
+
+        .contact-input { width: 100%; padding: 12px 15px; background-color: #1C1C1C; border: 1px solid #555; border-radius: 5px; color: #fff; font-family: 'HP Simplified', 'Montserrat', sans-serif; font-size: 1rem; box-sizing: border-box; }
+        .contact-input:focus { outline: none; border-color: #FFED00; box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        .contact-label { display: block; margin-bottom: 0.5rem; color: #ccc; font-weight: bold; }
+        
+        .form-section { display: none; }
+        .form-section.active { display: block; }
+        .navigation-buttons { display: flex; justify-content: space-between; margin-top: 2rem; }
+        .nav-btn, .submit-btn { padding: 1rem 2rem; background-color: #FFED00; color: #000; border: none; border-radius: 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+        .nav-btn-secondary { padding: 1rem 2rem; background-color: transparent; color: #FFD700; border: 2px solid #FFD700; border-radius: 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+        .nav-btn:hover, .submit-btn:hover { background-color: #FFFFFF; transform: scale(1.05); }
+        .nav-btn-secondary:hover { background-color: #FFED00; color: #000; }
+
+        .footer { text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #333; }
+        .footer h3 { color: #FFED00; font-weight: bold; margin-bottom: 1.5rem; }
+        .social-link { display: inline-flex; align-items: center; text-decoration: none; color: #ddd; margin: 10px 15px; transition: color 0.3s; }
+        .social-link:hover { color: #FFED00; }
+        .social-link i { font-size: 1.8rem; color: #FFD700; margin-right: 10px; }
+
+        /********************************/
+        /* REGLAS PARA DISEÑO RESPONSIVE */
+        /********************************/
+        @media (max-width: 768px) {
+
+            /* Hacemos que el padding general sea más pequeño en móviles */
+            body {
+                padding: 1rem;
+            }
+
+            /* Reducimos el tamaño de los títulos para que no sean tan grandes */
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            /* Ajustamos el tamaño del texto de introducción y las preguntas */
+            .intro-text, .question-title {
+                font-size: 1rem;
+            }
+
+            /* Reducimos el padding dentro de las tarjetas del formulario */
+            .form-group {
+                padding: 1.2rem 1.2rem;
+            }
+            
+            /* Hacemos que los botones de navegación ocupen un poco menos de espacio */
+            .nav-btn, .nav-btn-secondary, .submit-btn {
+                padding: 0.8rem 1.2rem;
+                font-size: 1rem;
+            }
+
+            /* Hacemos que los enlaces del footer se apilen verticalmente */
+            .footer div {
+                display: flex;
+                flex-direction: column; /* Apila los elementos uno sobre otro */
+                align-items: center;   /* Los centra en la columna */
+            }
+
+            .social-link {
+                margin: 10px 0; /* Ajusta el margen para el apilado vertical */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- El resto de tu body (el formulario, footer, etc.) va aquí sin ningún cambio -->
+    <!-- ... -->
+    <div class="container">
+        <div class="logo">
+            <img src="images/elev-arte-logo-pagina.png" alt="Logo Elev-Arte">
+        </div>
+
+        <h1>FORMULARIO DE AUTODESCUBRIMIENTO</h1>
+        <p class="intro-text">
+            Este formulario nos ayudará a definir tu identidad musical y artística para crear el impulso visual que tu música necesita.
+        </p>
+
+        <form id="artist-form" action="https://formspree.io/f/xdkwbjed" method="POST">
+
+           <!-- SECCIÓN DE CONTACTO -->
+            <div class="section-header"><h2>Datos de Contacto</h2></div>
+            <div class="form-group">
+                <label for="nombre" class="contact-label">Nombre</label>
+                <input type="text" id="nombre" name="nombre" class="contact-input" placeholder="Ej: Alex Rivera" required style="margin-bottom: 1rem;">
+                
+                <label for="correo" class="contact-label">Email</label>
+                <input type="email" id="correo" name="correo" class="contact-input" placeholder="Ej: alex.rivera@email.com" required style="margin-bottom: 1rem;">
+
+                <label for="red-social" class="contact-label">Red Social Principal (Opcional)</label>
+                <input type="text" id="red-social" name="red_social" class="contact-input" placeholder="Ej: @alexriveramusic">
+            </div>
+
+            <!-- Sección 1: El Sonido y la Expresión Musical -->
+            <div id="section-1" class="form-section active">
+                <div class="section-header"><h2>Sección 1: El Sonido y la Expresión Musical</h2></div>
+                <div class="form-group">
+                    <label class="question-title">1. Emoción Predominante:</label>
+                    <div class="option"><input type="radio" id="em1" name="emocion" value="alegria"><label for="em1">Alegría/Energía (Música bailable, fiesta, euforia)</label></div>
+                    <div class="option"><input type="radio" id="em2" name="emocion" value="melancolia"><label for="em2">Melancolía/Nostalgia (Tristeza, reflexión, añoranza)</label></div>
+                    <div class="option"><input type="radio" id="em3" name="emocion" value="conflicto"><label for="em3">Conflicto/Rabia/Protesta (Música para denunciar)</label></div>
+                    <div class="option"><input type="radio" id="em4" name="emocion" value="calma"><label for="em4">Calma/Meditación (Música para relajarse, estudiar)</label></div>
+                    <div class="option"><input type="radio" id="em5" name="emocion" value="asombro"><label for="em5">Asombro/Complejidad (Música para pensar, experimentar)</label></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="question-title">2. Ritmo y Pulso:</label>
+                    <p><strong>A) Tempo y groove dominante:</strong></p>
+                    <div class="option"><input type="radio" id="t1" name="tempo" value="rapido"><label for="t1">Rápido y bailable</label></div>
+                    <div class="option"><input type="radio" id="t2" name="tempo" value="medio"><label for="t2">Medio y sincopado</label></div>
+                    <div class="option"><input type="radio" id="t3" name="tempo" value="lento"><label for="t3">Lento y constante</label></div>
+                    <div class="option"><input type="radio" id="t4" name="tempo" value="variable"><label for="t4">Variable, complejo, o con cambios de tiempo</label></div>
+                    <br>
+                    <p><strong>B) Complejidad Rítmica:</strong></p>
+                    <div class="option"><input type="radio" id="cr1" name="complejidad" value="simple"><label for="cr1">Ritmos simples y muy repetitivos (énfasis en el beat)</label></div>
+                    <div class="option"><input type="radio" id="cr2" name="complejidad" value="complejo"><label for="cr2">Ritmos con contratiempos, síncopas o estructuras complejas</label></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="question-title">3. Instrumentación Base: (Marca todas las que apliquen)</label>
+                    <div class="option"><input type="checkbox" id="i1" name="instrumentacion[]" value="rock_pop"><label for="i1">Guitarra Eléctrica, Bajo, Batería (Set Rock/Pop)</label></div>
+                    <div class="option"><input type="checkbox" id="i2" name="instrumentacion[]" value="electronica"><label for="i2">Sintetizadores, Samplers, Cajas de Ritmos</label></div>
+                    <div class="option"><input type="checkbox" id="i3" name="instrumentacion[]" value="acusticos"><label for="i3">Instrumentos de Viento/Cuerda acústicos</label></div>
+                    <div class="option"><input type="checkbox" id="i4" name="instrumentacion[]" value="folcloricos"><label for="i4">Instrumentos Folclóricos/Étnicos</label></div>
+                    <div class="option"><input type="checkbox" id="i5" name="instrumentacion[]" value="voz_pistas"><label for="i5">Solo voz y bases/pistas (Hip-Hop)</label></div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <span></span> <!-- Espaciador para alinear a la derecha -->
+                    <button type="button" class="nav-btn" onclick="showSection(2)">Siguiente</button>
+                </div>
+            </div>
+
+            <!-- Sección 2: Contexto y Público -->
+            <div id="section-2" class="form-section">
+                <div class="section-header"><h2>Sección 2: Contexto y Público</h2></div>
+
+                <div class="form-group">
+                    <label class="question-title">4. Temática Predominante de las Letras:</label>
+                    <div class="option"><input type="radio" id="l1" name="letras" value="amor"><label for="l1">Amor, Desamor, Relaciones Personales</label></div>
+                    <div class="option"><input type="radio" id="l2" name="letras" value="critica"><label for="l2">Crítica social, política, lucha, protesta</label></div>
+                    <div class="option"><input type="radio" id="l3" name="letras" value="narrativas"><label for="l3">Narrativas complejas, ficción o temas abstractos</label></div>
+                    <div class="option"><input type="radio" id="l4" name="letras" value="cotidiana"><label for="l4">Vida cotidiana, Introspección personal</label></div>
+                    <div class="option"><input type="radio" id="l5" name="letras" value="fiesta"><label for="l5">Fiesta, baile, ostentación</label></div>
+                    <div class="option"><input type="radio" id="l6" name="letras" value="instrumental"><label for="l6">Las letras son secundarias o la música es instrumental</label></div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="question-title">5. Edad Promedio de tu Audiencia:</label>
+                    <div class="option"><input type="radio" id="a1" name="audiencia" value="15-25"><label for="a1">15 - 25 años (Generación Z/TikTok)</label></div>
+                    <div class="option"><input type="radio" id="a2" name="audiencia" value="25-40"><label for="a2">25 - 40 años (Millennials)</label></div>
+                    <div class="option"><input type="radio" id="a3" name="audiencia" value="40+"><label for="a3">40+ años</label></div>
+                    <div class="option"><input type="radio" id="a4" name="audiencia" value="no_seguro"><label for="a4">No estoy seguro/a, aún no tengo una audiencia definida</label></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="question-title">6. Conexión con el Público:</label>
+                    <div class="option"><input type="radio" id="c1" name="conexion" value="si_nicho"><label for="c1">Sí, mi música es muy de nicho o experimental</label></div>
+                    <div class="option"><input type="radio" id="c2" name="conexion" value="si_mensaje"><label for="c2">Sí, mi mensaje no está llegando claramente</label></div>
+                    <div class="option"><input type="radio" id="c3" name="conexion" value="no_comunidad"><label for="c3">No, tengo una comunidad fiel, aunque sea pequeña</label></div>
+                    <div class="option"><input type="radio" id="c4" name="conexion" value="no_accesible"><label for="c4">No, mi música es generalmente accesible y gusta a muchos</label></div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="nav-btn-secondary" onclick="showSection(1)">Anterior</button>
+                    <button type="button" class="nav-btn" onclick="showSection(3)">Siguiente</button>
+                </div>
+            </div>
+
+            <!-- Sección 3: El Perfil Profesional del Artista -->
+            <div id="section-3" class="form-section">
+                <div class="section-header"><h2>Sección 3: El Perfil Profesional del Artista</h2></div>
+                
+                <div class="form-group">
+                    <label class="question-title">7. Dedicación al Arte:</label>
+                    <div class="option"><input type="radio" id="d1" name="dedicacion" value="tiempo_completo"><label for="d1">Artista a tiempo completo</label></div>
+                    <div class="option"><input type="radio" id="d2" name="dedicacion" value="secundaria"><label for="d2">La música es secundaria por ahora</label></div>
+                    <div class="option"><input type="radio" id="d3" name="dedicacion" value="mismo_peso"><label for="d3">La música y otro trabajo/estudio tienen el mismo peso</label></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="question-title">8. Educación Superior (Actual):</label>
+                    <div class="option"><input type="radio" id="e1" name="educacion" value="si_relacionado"><label for="e1">Sí, relacionado con música/arte</label></div>
+                    <div class="option"><input type="radio" id="e2" name="educacion" value="si_no_relacionado"><label for="e2">Sí, no relacionado con música/arte</label></div>
+                    <div class="option"><input type="radio" id="e3" name="educacion" value="no"><label for="e3">No</label></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="question-title">9. Visión de Carrera:</label>
+                    <div class="option"><input type="radio" id="v1" name="vision" value="profesional"><label for="v1">Deseo vivir del arte, es mi carrera profesional</label></div>
+                    <div class="option"><input type="radio" id="v2" name="vision" value="pasatiempo"><label for="v2">Lo veo como un pasatiempo muy serio, pero no mi principal fuente de ingreso</label></div>
+                    <div class="option"><input type="radio" id="v3" name="vision" value="no_se"><label for="v3">Aún no lo sé</label></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="question-title">10. Momento de la Carrera:</label>
+                    <div class="option"><input type="radio" id="m1" name="momento" value="ascenso"><label for="m1">En pleno ascenso, generando tracción</label></div>
+                    <div class="option"><input type="radio" id="m2" name="momento" value="estancada"><label for="m2">Estancada, necesito un cambio</label></div>
+                    <div class="option"><input type="radio" id="m3" name="momento" value="desarrollo"><label for="m3">En fase de desarrollo y aprendizaje</label></div>
+                    <div class="option"><input type="radio" id="m4" name="momento" value="abrumado"><label for="m4">Me siento abrumado/a y con poca claridad</label></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="question-title">11. Necesidad de Apoyo: (Marca hasta dos)</label>
+                    <div class="option"><input type="checkbox" id="ap1" name="apoyo[]" value="identidad"><label for="ap1">Definición de mi Género Musical/Identidad</label></div>
+                    <div class="option"><input type="checkbox" id="ap2" name="apoyo[]" value="marketing"><label for="ap2">Estrategia de Marketing y Redes Sociales</label></div>
+                    <div class="option"><input type="checkbox" id="ap3" name="apoyo[]" value="produccion"><label for="ap3">Ayuda para Producción Musical y Calidad Sonora</label></div>
+                    <div class="option"><input type="checkbox" id="ap4" name="apoyo[]" value="monetizacion"><label for="ap4">Consejos para Monetización y Finanzas</label></div>
+                    <div class="option"><input type="checkbox" id="ap5" name="apoyo[]" value="networking"><label for="ap5">Networking y Contacto con la Industria</label></div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="nav-btn-secondary" onclick="showSection(2)">Anterior</button>
+                    <button type="submit" class="submit-btn">Enviar Formulario</button>
+                </div>
+            </div>
+        </form>
+
+        <footer class="footer">
+            <h3>CONTACTO Y REDES</h3>
+            <div>
+                <a href="https://www.instagram.com/elev_arteoficial" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                    <span>elev_arteoficial</span>
+                </a>
+                <a href="https://www.elevarte.cl" target="_blank" class="social-link">
+                    <i class="fas fa-globe"></i>
+                    <span>www.elevarte.cl</span>
+                </a>
+                <a href="mailto:elevartevalparaiso@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>elevartevalparaiso@gmail.com</span>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Función para mostrar la sección correcta y ocultar las demás
+        function showSection(sectionNumber) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar la sección deseada
+            const activeSection = document.getElementById('section-' + sectionNumber);
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
+            // Mover la vista al inicio del formulario
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>
